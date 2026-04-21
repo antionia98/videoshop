@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html}">
+<head>
+    <title>Ankauf</title>
+</head>
+<body>
+<section layout:fragment="content">
+  <h2>Ankauf von DVDs & Blu-Rays</h2>
+
+  <div class="ui segment">
+
+    <!--Erfolgsmeldung -->
+      <div class="ui positive message" th:if="${param.success}">
+        <div class="header">Vielen Dank!</div>
+        <p>Wir haben ihre Anfrage erhalten und melden uns per E-Mail.</p>
+      </div>
+
+    <form class="ui form" th:action="@{/ankauf}" method="post" th:object="${purchaseForm}">
+
+      <div class="field">
+        <label>E-Mail</label>
+        <input type="email" th:field="*{email}" placeholder="Ihre E-Mail-Adresse" required>
+        <div class="ui pointing red basic label" th:if="${#fields.hasErrors('email')}"
+             th:errors="*{email}">Fehler</div>
+      </div>
+
+      <div class="field">
+        <label>Welche DVDs oder Blu-Rays möchten Sie verkaufen?</label>
+        <textarea th:field="*{message}" rows="6" placeholder="Beschreiben Sie Ihre Artikel." required></textarea>
+        <div class="ui pointing red basic label" th:if="${#fields.hasErrors('message')}"
+             th:errors="*{message}">Fehler</div>
+      </div>
+
+      <button class="ui primary button" type="submit">Anfrage senden</button>
+    </form>
+
+  </div>
+
+</section>
+</body>
+</html>

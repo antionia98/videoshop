@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html}">
+
+<head>
+    <title>Ankauf-Anfragen</title>
+</head>
+
+<body>
+<section layout:fragment="content">
+
+    <h2>Ankauf-Anfragen</h2>
+
+    <table class="ui celled table">
+           <thead>
+           <tr>
+               <th>ID</th>
+               <th>E-Mail</th>
+               <th>Nachricht</th>
+               <th>Datum</th>
+           </tr>
+           </thead>
+
+    <tbody>
+    <tr th:each="req : ${requests}">
+        <td th:text="${req.id}">1</td>
+        <td th:text="${req.email}">kunde@beispiel.com</td>
+        <td th:text="${req.message}">Nachricht</td>
+        <td th:text="${#temporals.format(req.createdAt, 'dd.MM.yyyy HH:mm')}">Datum</td>
+    </tr>
+    </tbody>
+    </table>
+
+</section>
+</body>
+</html>
